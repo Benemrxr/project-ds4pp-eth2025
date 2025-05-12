@@ -16,5 +16,8 @@ Thumbs.db
 # Logs
 *.log
 
+# ignore the raw national newspaper data set
+all-the-news-2-1.csv
+
 # VS Code settings
 .vscode/
