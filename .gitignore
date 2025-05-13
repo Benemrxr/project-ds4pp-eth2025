@@ -19,5 +19,9 @@ Thumbs.db
 # ignore the raw national newspaper data set
 all-the-news-2-1.csv
 
+# ignore the INDPRO data set
+INDPRO.csv
+/data/INDPRO.csv
+
 # VS Code settings
 .vscode/
