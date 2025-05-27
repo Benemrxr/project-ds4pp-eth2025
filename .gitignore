@@ -19,9 +19,14 @@ Thumbs.db
 # ignore the raw national newspaper data set
 all-the-news-2-1.csv
 
+# ignore all the sample data sets of national newspapers
+sample_*.csv
+
+# ignore the df_nyt_sample.csv data set, which was only used temporarily.
+df_nyt_sample.csv
+
 # ignore the INDPRO data set
 INDPRO.csv
-/data/INDPRO.csv
 
 # VS Code settings
 .vscode/
