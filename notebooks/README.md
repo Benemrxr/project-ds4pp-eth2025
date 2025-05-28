@@ -1,20 +1,5 @@
 # 📓 Notebooks
 
-(notebooks will be restructured in a next step)
-
-## Current structure
-
-| Notebook | Purpose |
-|----------|---------|
-| `GDELT-IPI.ipynb`         | Notebook to get GDELT events **(to be deleted?)** |
-| `industrial-production.ipynb`      | Downloads and saves the INDPRO variable from FRED. **(to be moved into a script)** |
-| `national_news.ipynb`  | Load and sample articles. Sentiment score computation using dictionary-based method. Topic modeling on all samples. Model training and evalutation. **(to be restructured into different files)** |
-| `Supervised.ipynb` | Filtered articles by economic keywords. TF-IDF feature extraction, model training and evaluation. **(to be restructured, and add topic shares)** |
-
-## Future structure...
-
-This folder contains Jupyter notebooks used throughout the project, structured by purpose and order of execution.
-
 ## Notebook Structure
 
 | Notebook | Purpose |
@@ -29,4 +14,12 @@ This folder contains Jupyter notebooks used throughout the project, structured b
 ## Guidelines
 
 - Run the notebooks in order unless noted otherwise.
-- Avoid modifying notebooks in place. Create a copy like `05_model_training_v2.ipynb` if testing major changes.
+
+## Old notebooks
+
+| Notebook | Purpose |
+|----------|---------|
+| `GDELT-IPI.ipynb`         | Notebook to get GDELT events **(to be deleted?)** |
+| `industrial-production.ipynb`      | Downloads and saves the INDPRO variable from FRED. **(to be moved into a script)** |
+| `national_news.ipynb`  | Load and sample articles. Sentiment score computation using dictionary-based method. Topic modeling on all samples. Model training and evalutation. **(to be restructured into different files)** |
+| `Supervised.ipynb` | Filtered articles by economic keywords. TF-IDF feature extraction, model training and evaluation. **(to be restructured, and add topic shares)** |
