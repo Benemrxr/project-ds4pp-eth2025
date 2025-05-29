@@ -36,6 +36,7 @@ def fetch_indpro_data(
     )
     df_filtered = df.loc[mask].copy()
     df_filtered.to_csv(output_path, index=False, mode="w")
+    return df_filtered
 
 if __name__ == "__main__":
     df_indpro = fetch_indpro_data()
