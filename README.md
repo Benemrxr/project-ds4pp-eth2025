@@ -35,6 +35,8 @@ It is recommended to use a virtual environment to manage dependencies.
 ```bash
 # Create a virtual environment named '.venv'
 python3.12 -m venv .venv
+# or
+py -3.12 -m venv .venv
 
 # Activate the virtual environment
 # On Windows:
@@ -53,4 +55,8 @@ pip install -r requirements.txt
 
 ## Data preparation
 
-Manually source the "All the News 2.1" data set from ProtonDrive. No automated download possible. See instructions in the data folder.
+First, download the main newspaper file manually according to the README.md in data/raw/newspapers. Then run the data-prep source code as follows:
+
+```bash
+python src/dataset.py
+```
