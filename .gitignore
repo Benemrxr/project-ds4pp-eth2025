@@ -30,3 +30,6 @@ INDPRO.csv
 
 # VS Code settings
 .vscode/
+
+# Ignore large model files
+models/topic_model/slda_model
