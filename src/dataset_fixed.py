@@ -142,12 +142,12 @@ if __name__ == "__main__":
     # Download and save INDPRO data
     print("Downloading and processing INDPRO data...")
     df_indpro = fetch_indpro_data()
-    print(f"✅ Downloaded and saved {len(df_indpro)} rows to INDPRO.csv")
+    print(f"Downloaded and saved {len(df_indpro)} rows to INDPRO.csv")
     
     # Generate IPI data
     print("\nGenerating IPI data by month and publisher...")
     df_ipi = process_ipi_by_month()
-    print(f"✅ Created IPI data with {len(df_ipi)} records")
+    print(f"Created IPI data with {len(df_ipi)} records")
     
     # Generate publishers data and save it
     print("\nGenerating publishers data...")
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     publishers_output = "../data/processed/publishers.csv"
     Path(publishers_output).parent.mkdir(parents=True, exist_ok=True)
     publishers_df.to_csv(publishers_output, index=False)
-    print(f"✅ Saved publisher data with {len(publishers_df)} publishers to publishers.csv")
+    print(f"Saved publisher data with {len(publishers_df)} publishers to publishers.csv")
     
     # Ask user before starting the long-running newspaper sampling
     print("\nDo you want to sample articles for each publisher?")
@@ -167,9 +167,9 @@ if __name__ == "__main__":
         print("\nSampling articles for each publisher...")
         try:
             sample_publisher_articles()
-            print("✅ Completed sampling articles for all publishers")
+            print("Completed sampling articles for all publishers")
         except Exception as e:
-            print(f"❌ Error when sampling articles: {str(e)}")
+            print(f"Error when sampling articles: {str(e)}")
     else:
         print("Skipping newspaper article sampling.")
     
