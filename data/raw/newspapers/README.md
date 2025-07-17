@@ -13,4 +13,4 @@ The data set is created by Andrew Thompson and available to download from [Compo
 
 1. Obtain the dataset from the linked website.
 2. Download the dataset files to your local machine.
-3. Place the downloaded files in this folder (`raw/newspapers`).
+3. Place the downloaded, unzipped file in this folder (`raw/newspapers`).

@@ -8,6 +8,8 @@
 - [Getting Started](#getting-started)
     - [Python Environment](#python-environment)
     - [Data Preparation](#data-preparation)
+- [Repository Overview](#repository-overview)
+- [Contact](#contact)
 
 ## Project Overview
 
@@ -15,7 +17,7 @@ This project investigates which features derived from newspaper articles in whic
 
 - Collecting and preprocessing national newspaper data.
 - Constructing text-based indicators using methods such as topic modeling and sentiment analysis.
-- Building predictive models to forecast U.S. industrial production, comparing models using all national news with those that are filtered on economic articles.
+- Building predictive models to forecast U.S. industrial production, comparing different models and specifications.
 - Evaluating model performance and interpreting the impact of different features.
 
 For a detailed project outline, see our project report.

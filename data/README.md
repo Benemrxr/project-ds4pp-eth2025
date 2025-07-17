@@ -8,8 +8,8 @@ This folder contains all datasets used and generated during the project. It is o
 | File/Folder                             | Description |
 |----------------------------------------|-------------|
 | `raw/`                           | Contains all raw data sets. The Loughran-McDonald financial sentiment dictionary, the industrial production index, and the primary news corpus. |
-| `raw/newspapers/`                           | Contains the "All the News 2.1" data set. ⚠️ Not committed to version control. |
-| `raw/INDPRO.csv`                            | Monthly U.S. Industrial Production Index (target variable). ⚠️ Not committed to version control. |
+| `raw/newspapers/`                           | Contains the "All the News 2.1" data set. ⚠️ Not committed to version control due to size. |
+| `raw/INDPRO.csv`                            | Monthly U.S. Industrial Production Index (target variable). ⚠️ Not committed to version control, automated download. |
 | `raw/Loughran_McDonald_MasterDictionary_1993-2024.csv`                           | Contains the Loughran-McDonald financial sentiment dictionary. |
 | `processed/`                           | Contains nall processed data sets. |
 | `processed/newspapers/`                           | Contains all newspaper articles sampled by the different publishers.  |
@@ -18,4 +18,4 @@ This folder contains all datasets used and generated during the project. It is o
 
 ## ⚠️ Notes
 
-- The sentiment and topic share files are generated artifacts — should be reproducible from the notebooks. (will do this for the final version)
+- The sentiment and topic share files are generated artifacts — should be reproducible from the notebooks.
