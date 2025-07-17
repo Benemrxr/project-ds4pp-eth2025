@@ -6,8 +6,8 @@
 
 - [Project Overview](#project-overview)
 - [Getting Started](#getting-started)
-- [Python Environment](#python-environment)
-- [Installation](#installation)
+    - [Python Environment](#python-environment)
+    - [Data Preparation](#data-preparation)
 
 ## Project Overview
 
@@ -18,7 +18,7 @@ This project investigates which features derived from newspaper articles in whic
 - Building predictive models to forecast U.S. industrial production, comparing models using all national news with those that are filtered on economic articles.
 - Evaluating model performance and interpreting the impact of different features.
 
-For a detailed project outline, see our [Overleaf project](https://www.overleaf.com/project/67fd24e6b55bac29453657d7).
+For a detailed project outline, see our project report.
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ Follow these instructions to set up your development environment.
 
 This project requires **Python 3.12**.
 
-### Setting up a Virtual Environment
+#### Setting up a Virtual Environment
 
 It is recommended to use a virtual environment to manage dependencies.
 
@@ -45,7 +45,7 @@ py -3.12 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Installation
+#### Installation
 
 After activating your virtual environment, install the required dependencies:
 
@@ -53,10 +53,39 @@ After activating your virtual environment, install the required dependencies:
 pip install -r requirements.txt
 ```
 
-## Data preparation
+### Data preparation
 
-First, download the main newspaper file manually according to the README.md in data/raw/newspapers. Then run the data-prep source code as follows:
+Two data preparation steps:
+
+1. Download main newspaper file
+2. Run dataprep source code
+
+#### 1. Main Newspaper File
+
+The newspaper dataset for this project is called **All The News 2.0** created by Andrew Thompson and made available by [components.one](https://components.one/datasets/all-the-news-2-news-articles-dataset). The dataset is hosted on ProtonDrive, which does not allow for an automatic download.
+
+Therefore, please download the dataset manually yourself following the download box at the end of this page: [components.one](https://components.one/datasets/all-the-news-2-news-articles-dataset).
+
+The file is 3.1 GB compressed, 8.8 GB uncompressed. 
+
+Unzip the dataset in this folder: `data/raw/newspaper`.
+
+#### 2. Run dataprep source code
+
+From the project root, run the following code to run the data preparation script:
 
 ```bash
 python src/dataset.py
 ```
+
+Observe the terminal output to see if the data preparation process is completed.
+
+## Repository Overview
+
+This repository contains all the source code ([src](https://github.com/Benemrxr/project-ds4pp-eth2025/tree/main/src)), some data files for faster replication ([data](https://github.com/Benemrxr/project-ds4pp-eth2025/tree/main/data)), as well as some stored results ([models](https://github.com/Benemrxr/project-ds4pp-eth2025/tree/main/models) and [plots](https://github.com/Benemrxr/project-ds4pp-eth2025/tree/main/plots)).
+
+Finally, our analysis is described step-by-step in the various ([notebooks](https://github.com/Benemrxr/project-ds4pp-eth2025/tree/main/notebooks)). Note the labels and ordering.
+
+## Contact
+
+- For any questions or feedback feel free to reach our to any of us [contributors](https://github.com/Benemrxr/project-ds4pp-eth2025/graphs/contributors)!

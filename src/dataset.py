@@ -23,7 +23,7 @@ def fetch_indpro_data(
     url: str = INDPRO_URL,
     start_date: str = "2010-01-01",
     end_date: str = "2020-12-31",
-    output_path: str = "../data/raw/INDPRO.csv"
+    output_path: str = "data/raw/INDPRO.csv"
 ) -> pd.DataFrame:
     """
     Download the INDPRO series from FRED, filter to a date range,
@@ -35,15 +35,16 @@ def fetch_indpro_data(
         & (df["observation_date"] <= end_date)
     )
     df_filtered = df.loc[mask].copy()
+    
+    # Create directory if it doesn't exist
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+    
     df_filtered.to_csv(output_path, index=False, mode="w")
     return df_filtered
 
-if __name__ == "__main__":
-    df_indpro = fetch_indpro_data()
-    print(f"✅ Downloaded and saved {len(df_indpro)} rows to {df_indpro!s}")  # or log path
 
 def fetch_publishers(
-    csv_path: str = "../data/raw/newspapers/all-the-news-2-1.csv"
+    csv_path: str = "data/raw/newspapers/all-the-news-2-1.csv"
 ) -> pd.DataFrame:
     """
     Return a DataFrame of (publication, n_articles) for every unique publisher.
@@ -64,8 +65,8 @@ def fetch_publishers(
 
 
 def sample_publisher_articles(
-    raw_csv: str = "../data/raw/newspapers/all-the-news-2-1.csv",
-    output_dir: str = "../data/processed/newspapers",
+    raw_csv: str = "data/raw/newspapers/all-the-news-2-1.csv",
+    output_dir: str = "data/processed/newspapers",
     max_samples: int = 10000,
     seed: int = 42
 ) -> None:
@@ -92,3 +93,103 @@ def sample_publisher_articles(
         out_path = Path(output_dir) / f"sample_{safe}.csv"
         sample_df.to_csv(out_path, index=False)
         print(f"Saved {n} rows for '{pub}' → {out_path}")
+
+
+def process_ipi_by_month(
+    indpro_path: str = "data/raw/INDPRO.csv",
+    output_path: str = "data/processed/ipi_data.csv"
+) -> pd.DataFrame:
+    """
+    Process INDPRO data to create monthly IPI values per publisher.
+    This creates a simulated dataset matching the newspaper data's structure.
+    """
+    # Read INDPRO data
+    df = pd.read_csv(indpro_path, parse_dates=["observation_date"])
+    
+    # Get publishers list
+    pubs = fetch_publishers()
+    publishers = pubs["publication"].tolist()
+    
+    # Create month column and filter to desired range
+    df["month"] = df["observation_date"].dt.strftime("%Y-%m")
+    df = df.rename(columns={"INDPRO": "ipi_value"})
+    
+    # Create output dataframe with month-publisher combinations
+    results = []
+    for month in df["month"].unique():
+        ipi = df[df["month"] == month]["ipi_value"].iloc[0]
+        for pub in publishers:
+            results.append({
+                "month": month,
+                "publication": pub,
+                "ipi_value": ipi
+            })
+    
+    result_df = pd.DataFrame(results)
+    
+    # Save to file
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+    result_df.to_csv(output_path, index=False)
+    
+    return result_df
+
+
+if __name__ == "__main__":
+    # Check if the required newspaper dataset exists
+    newspaper_file = "data/raw/newspapers/all-the-news-2-1.csv"
+    
+    if not Path(newspaper_file).exists():
+        print("❌ Missing required dataset!")
+        print(f"Expected file: {Path(newspaper_file).resolve()}")
+        print("\nTo proceed with this analysis, you need to:")
+        print("1. Download 'All the News 2.0' dataset from:")
+        print("   https://components.one/datasets/all-the-news-2-news-articles-dataset")
+        print("2. Extract the CSV file to the data/raw/newspapers/ folder")
+        print("3. Ensure the file is named 'all-the-news-2-1.csv'")
+        print("\nNote: This is a large file (~8.5GB), so download may take some time.")
+        exit(1)
+    else:
+        print("✅ Required newspaper dataset found!")
+        print(f"File location: {Path(newspaper_file).resolve()}")
+        file_size = Path(newspaper_file).stat().st_size / (1024**3)  # Convert to GB
+        print(f"File size: {file_size:.2f} GB")
+    
+    # Set up directories
+    Path("data/raw").mkdir(parents=True, exist_ok=True)
+    Path("data/processed").mkdir(parents=True, exist_ok=True)
+    
+    # Download and save INDPRO data
+    print("\nDownloading and processing INDPRO data...")
+    df_indpro = fetch_indpro_data()
+    print(f"Downloaded and saved {len(df_indpro)} rows to INDPRO.csv")
+    
+    # Generate IPI data
+    print("\nGenerating IPI data by month and publisher...")
+    df_ipi = process_ipi_by_month()
+    print(f"Created IPI data with {len(df_ipi)} records")
+    
+    # Generate publishers data and save it
+    print("\nGenerating publishers data...")
+    publishers_df = fetch_publishers()
+    
+    publishers_output = "../data/processed/publishers.csv"
+    Path(publishers_output).parent.mkdir(parents=True, exist_ok=True)
+    publishers_df.to_csv(publishers_output, index=False)
+    print(f"Saved publisher data with {len(publishers_df)} publishers to publishers.csv")
+    
+    # Ask user before starting the long-running newspaper sampling
+    print("\nDo you want to sample articles for each publisher?")
+    print("This can take a long time as it processes the newspaper data. (y/n)")
+    choice = input().strip().lower()
+    
+    if choice == 'y':
+        print("\nSampling articles for each publisher...")
+        try:
+            sample_publisher_articles()
+            print("Completed sampling articles for all publishers")
+        except Exception as e:
+            print(f"Error when sampling articles: {str(e)}")
+    else:
+        print("Skipping newspaper article sampling.")
+    
+    print("\nData processing complete!")
